@@ -1,4 +1,4 @@
-package com.proppay.platform.pay.domain.property;
+package com.proppay.platform.pay.domain.broker;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class PropertyAddress {
+public class BrokerAddress {
 
     private String streetAddress; // 도로명 주소
     private String detailAddress; // 상세 주소 (동/호수 등)
@@ -21,9 +21,9 @@ public class PropertyAddress {
     private String city;          // 도시 (서울, 경기 등)
 
     // 생성자
-    public static PropertyAddress of(String streetAddress, String detailAddress,
-                                     String postalCode) {
-        return PropertyAddress.builder()
+    public static BrokerAddress of(String streetAddress, String detailAddress,
+                                   String postalCode) {
+        return BrokerAddress.builder()
                 .streetAddress(streetAddress)
                 .detailAddress(detailAddress)
                 .postalCode(postalCode)
