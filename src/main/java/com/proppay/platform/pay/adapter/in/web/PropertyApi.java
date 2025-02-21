@@ -9,6 +9,7 @@ import com.proppay.platform.pay.application.in.dto.PropertyRequest;
 import com.proppay.platform.pay.application.in.property.*;
 import com.proppay.platform.pay.domain.property.Property;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,7 +31,7 @@ public class PropertyApi {
 
     // 매물 생성
     @PostMapping
-    public ApiResponse<PropertyDetailResponse> create(@RequestBody PropertyRequest request) {
+    public ApiResponse<PropertyDetailResponse> create(@Valid @RequestBody PropertyRequest request) {
         return ApiResponse.created(PropertyDetailResponse.from(createService.create(request)));
     }
 
