@@ -7,4 +7,8 @@ public interface ApproveBrokerUseCase {
         공인중개사 역할로 업그레이드 해주는 유즈케이스
      */
 
+    void approveBroker(Long AdminId, Long brokerId);
+
+
+
 }
