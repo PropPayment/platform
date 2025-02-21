@@ -5,7 +5,7 @@ import com.proppay.platform.core.dto.PageRequest;
 import com.proppay.platform.core.dto.PageResponse;
 import com.proppay.platform.pay.adapter.in.web.dto.PropertyDetailResponse;
 import com.proppay.platform.pay.adapter.in.web.dto.PropertyListResponse;
-import com.proppay.platform.pay.application.in.dto.PropertyRequest;
+import com.proppay.platform.pay.adapter.in.web.dto.PropertyRequest;
 import com.proppay.platform.pay.application.in.property.*;
 import com.proppay.platform.pay.domain.property.Property;
 import jakarta.persistence.EntityNotFoundException;

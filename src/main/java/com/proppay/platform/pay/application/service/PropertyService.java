@@ -1,8 +1,8 @@
-package com.proppay.platform.pay.application.service.property;
+package com.proppay.platform.pay.application.service;
 
 
-import com.proppay.platform.pay.application.in.dto.ConditionRequest;
-import com.proppay.platform.pay.application.in.dto.PropertyRequest;
+import com.proppay.platform.pay.adapter.in.web.dto.ConditionRequest;
+import com.proppay.platform.pay.adapter.in.web.dto.PropertyRequest;
 import com.proppay.platform.pay.application.in.property.*;
 import com.proppay.platform.pay.application.out.property.DeletePropertyPort;
 import com.proppay.platform.pay.application.out.property.LoadPropertyPort;

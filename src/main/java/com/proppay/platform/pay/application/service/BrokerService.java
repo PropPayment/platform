@@ -1,9 +1,7 @@
 package com.proppay.platform.pay.application.service;
 
-import com.proppay.platform.pay.application.in.broker.ApproveBrokerUseCase;
-import com.proppay.platform.pay.application.in.broker.DeleteBrokerUseCase;
-import com.proppay.platform.pay.application.in.broker.RegisterBrokerUseCase;
-import com.proppay.platform.pay.application.in.dto.BrokerRequest;
+import com.proppay.platform.pay.application.in.broker.*;
+import com.proppay.platform.pay.adapter.in.web.dto.BrokerRequest;
 import com.proppay.platform.pay.application.out.admin.AdminPort;
 import com.proppay.platform.pay.application.out.broker.DeleteBrokerPort;
 import com.proppay.platform.pay.application.out.broker.LoadBrokerPort;
@@ -11,15 +9,20 @@ import com.proppay.platform.pay.application.out.broker.SaveBrokerPort;
 import com.proppay.platform.pay.domain.admin.Admin;
 import com.proppay.platform.pay.domain.broker.Broker;
 import com.proppay.platform.pay.domain.broker.BrokerAddress;
+import com.proppay.platform.pay.domain.property.Property;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class BrokerService implements RegisterBrokerUseCase, ApproveBrokerUseCase, DeleteBrokerUseCase {
+public class BrokerService implements RegisterBrokerUseCase, ApproveBrokerUseCase, DeleteBrokerUseCase, GetBrokerUseCase, ListBrokersUseCase {
 
     private final LoadBrokerPort loadPort;
     private final SaveBrokerPort savePort;
@@ -62,4 +65,23 @@ public class BrokerService implements RegisterBrokerUseCase, ApproveBrokerUseCas
         deletePort.deleteBroker(brokerId);
     }
 
+    @Override
+    public Optional<Broker> getBroker(Long brokerId) {
+        return loadPort.loadBroker(brokerId);
+    }
+
+    @Override
+    public Page<Broker> getList(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<Property> getListByRegion(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Page<Property> getListByLikeCount(Pageable pageable) {
+        return null;
+    }
 }

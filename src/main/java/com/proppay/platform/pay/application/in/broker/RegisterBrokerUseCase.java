@@ -1,6 +1,6 @@
 package com.proppay.platform.pay.application.in.broker;
 
-import com.proppay.platform.pay.application.in.dto.BrokerRequest;
+import com.proppay.platform.pay.adapter.in.web.dto.BrokerRequest;
 import com.proppay.platform.pay.domain.broker.Broker;
 
 public interface RegisterBrokerUseCase {

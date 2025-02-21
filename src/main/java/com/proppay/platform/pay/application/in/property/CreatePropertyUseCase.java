@@ -1,6 +1,6 @@
 package com.proppay.platform.pay.application.in.property;
 
-import com.proppay.platform.pay.application.in.dto.PropertyRequest;
+import com.proppay.platform.pay.adapter.in.web.dto.PropertyRequest;
 import com.proppay.platform.pay.domain.property.Property;
 
 public interface CreatePropertyUseCase {

@@ -1,4 +1,4 @@
-package com.proppay.platform.pay.application.in.dto;
+package com.proppay.platform.pay.adapter.in.web.dto;
 
 import lombok.Data;
 

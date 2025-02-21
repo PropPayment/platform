@@ -2,7 +2,7 @@ package com.proppay.platform.pay.adapter.out;
 
 import com.proppay.platform.pay.adapter.out.jpa.property.PropertyJpaEntity;
 import com.proppay.platform.pay.adapter.out.jpa.property.PropertyJpaEntityRepository;
-import com.proppay.platform.pay.application.in.dto.ConditionRequest;
+import com.proppay.platform.pay.adapter.in.web.dto.ConditionRequest;
 import com.proppay.platform.pay.application.out.property.DeletePropertyPort;
 import com.proppay.platform.pay.application.out.property.LoadPropertyPort;
 import com.proppay.platform.pay.application.out.property.SavePropertyPort;

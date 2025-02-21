@@ -1,6 +1,6 @@
-package com.proppay.platform.pay.application.service.user;
+package com.proppay.platform.pay.application.service;
 
-import com.proppay.platform.pay.application.in.dto.UserRequest;
+import com.proppay.platform.pay.adapter.in.web.dto.UserRequest;
 import com.proppay.platform.pay.application.in.user.LoginUserUseCase;
 import com.proppay.platform.pay.application.in.user.RegisterUserUseCase;
 import com.proppay.platform.pay.application.in.user.UpdateUserProfileUseCase;

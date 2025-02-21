@@ -1,6 +1,6 @@
 package com.proppay.platform.pay.application.in.property;
 
-import com.proppay.platform.pay.application.in.dto.ConditionRequest;
+import com.proppay.platform.pay.adapter.in.web.dto.ConditionRequest;
 import com.proppay.platform.pay.domain.property.Property;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

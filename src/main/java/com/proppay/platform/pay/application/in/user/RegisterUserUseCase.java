@@ -1,6 +1,6 @@
 package com.proppay.platform.pay.application.in.user;
 
-import com.proppay.platform.pay.application.in.dto.UserRequest;
+import com.proppay.platform.pay.adapter.in.web.dto.UserRequest;
 import com.proppay.platform.pay.domain.user.User;
 
 public interface RegisterUserUseCase {
