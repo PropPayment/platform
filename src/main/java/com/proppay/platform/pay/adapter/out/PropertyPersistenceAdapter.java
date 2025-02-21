@@ -37,23 +37,20 @@ public class PropertyPersistenceAdapter implements LoadPropertyPort, SavePropert
 
     @Override
     public Page<Property> loadList(Pageable pageable) {
-        Page<Property> result = repository.findAllByOrderByCreatedAtDesc(pageable).map(PropertyJpaEntity::toDomain);
-        List<Property> dtoList = result.getContent();
-        return new PageImpl<>(dtoList, pageable, result.getTotalElements());
+        Page<PropertyJpaEntity> result = repository.findAllByOrderByCreatedAtDesc(pageable);
+        return convertToPage(result, pageable);
     }
 
     @Override
     public Page<Property> loadListByLikeCount(Pageable pageable) {
-        Page<Property> result = repository.findAllOrderByLikeCount(pageable).map(PropertyJpaEntity::toDomain);
-        List<Property> dtoList = result.getContent();
-        return new PageImpl<>(dtoList, pageable, result.getTotalElements());
+        Page<PropertyJpaEntity> result = repository.findAllOrderByLikeCount(pageable);
+        return convertToPage(result, pageable);
     }
 
     @Override
     public Page<Property> loadListByViewCount(Pageable pageable) {
-        Page<Property> result = repository.findAllOrderByViewCount(pageable).map(PropertyJpaEntity::toDomain);
-        List<Property> dtoList = result.getContent();
-        return new PageImpl<>(dtoList, pageable, result.getTotalElements());
+        Page<PropertyJpaEntity> result = repository.findAllOrderByViewCount(pageable);
+        return convertToPage(result, pageable);
     }
 
     @Override
@@ -64,5 +61,14 @@ public class PropertyPersistenceAdapter implements LoadPropertyPort, SavePropert
     @Override
     public void deleteProperty(Long id) {
         repository.deleteById(id);
+    }
+
+    /**
+     * Page<PropertyJpaEntity>를 Page<Property>로 변환하는 공통 메서드
+     */
+
+    private Page<Property> convertToPage(Page<PropertyJpaEntity> result, Pageable pageable) {
+        List<Property> dtoList = result.map(PropertyJpaEntity::toDomain).getContent();
+        return new PageImpl<>(dtoList, pageable, result.getTotalElements());
     }
 }

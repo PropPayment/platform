@@ -6,7 +6,7 @@ import com.proppay.platform.pay.application.in.dto.PropertyRequest;
 import com.proppay.platform.pay.application.in.property.*;
 import com.proppay.platform.pay.application.out.property.DeletePropertyPort;
 import com.proppay.platform.pay.application.out.property.LoadPropertyPort;
-import com.proppay.platform.pay.application.out.LoadUserPort;
+import com.proppay.platform.pay.application.out.user.LoadUserPort;
 import com.proppay.platform.pay.application.out.property.SavePropertyPort;
 import com.proppay.platform.pay.domain.property.Property;
 import com.proppay.platform.pay.domain.property.PropertyAddress;
