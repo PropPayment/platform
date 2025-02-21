@@ -21,6 +21,7 @@ public class BrokerAddressJpaEntity {
     // 데이터의 검색 쉽게하는 용도
     private String city;          // 도시 (서울, 부산 등)
     private String district;      // 구/군 (강남구, 수원시 영통구 등)
+    private String dong;
 
     // from
     public static BrokerAddressJpaEntity from(BrokerAddress brokerAddress) {
@@ -30,6 +31,7 @@ public class BrokerAddressJpaEntity {
                 .postalCode(brokerAddress.getPostalCode())
                 .city(brokerAddress.getCity())
                 .district(brokerAddress.getDistrict())
+                .dong(brokerAddress.getDong())
                 .build();
     }
 

@@ -18,7 +18,10 @@ public class BrokerJpaEntity extends BaseEntity {
     private Long id;
 
     private String name;  // 공인중개사 이름
+
+    @Column(unique = true)
     private String licenseNumber;  // 공인중개사 등록번호
+
     private String phoneNumber;  // 연락처
 
     @Embedded
@@ -37,6 +40,7 @@ public class BrokerJpaEntity extends BaseEntity {
                 .licenseNumber(broker.getLicenseNumber())
                 .phoneNumber(broker.getPhoneNumber())
                 .address(BrokerAddressJpaEntity.from(broker.getAddress()))
+                .statistics(BrokerStatisticsJpaEntity.from(broker.getStatistics()))
                 .status(broker.getStatus())
                 .build();
     }
@@ -48,6 +52,7 @@ public class BrokerJpaEntity extends BaseEntity {
                 .licenseNumber(this.licenseNumber)
                 .phoneNumber(this.phoneNumber)
                 .address(this.address.toDomain())
+                .statistics(this.statistics.toDomain())
                 .status(this.status)
                 .build();
     }

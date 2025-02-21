@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.validation.constraints.Pattern;
 
 @Getter
 @Setter
@@ -14,6 +15,7 @@ public class BrokerRequest {
     private String name;
 
     @NotBlank(message = "등록번호는 필수입니다.")
+    @Pattern(regexp = "^\\d{4}-\\d{4}$|^\\d{5}-\\d{4}-\\d{5}$", message = "올바른 등록번호 형식을 입력하세요.")
     private String licenseNumber;
 
     @NotBlank(message = "연락처는 필수입니다.")

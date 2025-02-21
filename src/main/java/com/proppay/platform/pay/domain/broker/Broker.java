@@ -24,18 +24,23 @@ public class Broker {
     private String licenseNumber;  // 공인중개사 등록번호
     private String phoneNumber;  // 연락처
     private BrokerAddress address;  // 중개사무소 주소
+    private BrokerStatistics statistics; // 통계정보
 
     @Enumerated(EnumType.STRING)
-    private BrokerStatus status = BrokerStatus.PENDING;  // 승인 여부 (PENDING, APPROVED, REJECTED)
+    private BrokerStatus status;  // 승인 여부 (PENDING, APPROVED, REJECTED)
 
     // 생성자
     public static Broker of(String name, String licenseNumber, String phoneNumber, BrokerAddress address) {
+
+        BrokerStatistics statistics = BrokerStatistics.of(0, 0.0, 0);
 
         return Broker.builder()
                 .name(name)
                 .licenseNumber(licenseNumber)
                 .phoneNumber(phoneNumber)
                 .address(address)
+                .statistics(statistics)
+                .status(BrokerStatus.PENDING)
                 .build();
     }
 
@@ -54,7 +59,7 @@ public class Broker {
         }
 
         this.status = BrokerStatus.APPROVED;
-        log.info("공인중개사 : {} ,승인한 관리자 : {}", this.getLicenseNumber(), admin.getId());
+        log.info("공인중개사 : {},승인한 관리자 : {}", this.getLicenseNumber(), admin.getId());
     }
 
 
