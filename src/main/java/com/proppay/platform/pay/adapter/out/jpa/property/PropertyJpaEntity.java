@@ -52,7 +52,7 @@ public class PropertyJpaEntity extends BaseEntity {
     }
 
     // toDomain
-    public Property toDomain(PropertyJpaEntity entity){
+    public Property toDomain(){
         return Property.builder()
                 .id(id)
                 .type(type)
