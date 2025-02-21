@@ -16,18 +16,17 @@ public class PropertyAddress {
     private String postalCode;    // 우편번호
 
     // 데이터의 검색 쉽게하는 용도
-    private String city;          // 도시 (서울, 부산 등)
-    private String district;      // 구/군 (강남구, 수원시 영통구 등)
+    private String dong;          // 동 (야탑동, 서현동 등 )
+    private String district;      // 구/군 (강남구, 성남시 분당구 등)
+    private String city;          // 도시 (서울, 경기 등)
 
     // 생성자
     public static PropertyAddress of(String streetAddress, String detailAddress,
-                                     String postalCode, String city, String district) {
+                                     String postalCode) {
         return PropertyAddress.builder()
                 .streetAddress(streetAddress)
                 .detailAddress(detailAddress)
                 .postalCode(postalCode)
-                .city(city)
-                .district(district)
                 .build();
     }
 
