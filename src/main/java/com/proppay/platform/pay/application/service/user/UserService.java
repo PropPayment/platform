@@ -1,10 +1,10 @@
-package com.proppay.platform.pay.application.service;
+package com.proppay.platform.pay.application.service.user;
 
 import com.proppay.platform.pay.application.in.dto.UserRequest;
 import com.proppay.platform.pay.application.in.user.LoginUserUseCase;
 import com.proppay.platform.pay.application.in.user.RegisterUserUseCase;
 import com.proppay.platform.pay.application.in.user.UpdateUserProfileUseCase;
-import com.proppay.platform.pay.application.out.SaveUserPort;
+import com.proppay.platform.pay.application.out.user.SaveUserPort;
 import com.proppay.platform.pay.domain.user.User;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

@@ -2,8 +2,8 @@ package com.proppay.platform.pay.adapter.out;
 
 import com.proppay.platform.pay.adapter.out.jpa.user.UserJpaEntity;
 import com.proppay.platform.pay.adapter.out.jpa.user.UserJpaEntityRepository;
-import com.proppay.platform.pay.application.out.LoadUserPort;
-import com.proppay.platform.pay.application.out.SaveUserPort;
+import com.proppay.platform.pay.application.out.user.LoadUserPort;
+import com.proppay.platform.pay.application.out.user.SaveUserPort;
 import com.proppay.platform.pay.domain.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

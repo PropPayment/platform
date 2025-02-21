@@ -1,4 +1,4 @@
-package com.proppay.platform.pay.application.out;
+package com.proppay.platform.pay.application.out.user;
 
 import com.proppay.platform.pay.domain.user.User;
 

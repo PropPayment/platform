@@ -38,7 +38,7 @@ public class PropertyApi {
     @GetMapping("/list")
     public ApiResponse<PageResponse<PropertyListResponse>> listProperty(PageRequest pageRequest) {
         Pageable pageable = org.springframework.data.domain.PageRequest.of(
-                pageRequest.getPage(),
+                pageRequest.getPage() - 1,
                 pageRequest.getSize(),
                 Sort.by(Sort.Direction.DESC, "id")
         );
@@ -53,7 +53,7 @@ public class PropertyApi {
     @GetMapping("/list/view")
     public ApiResponse<PageResponse<PropertyListResponse>> listPropertyByView(PageRequest pageRequest) {
         Pageable pageable = org.springframework.data.domain.PageRequest.of(
-                pageRequest.getPage(),
+                pageRequest.getPage() - 1,
                 pageRequest.getSize(),
                 Sort.by(Sort.Direction.DESC, "statistic.viewCount") // 조회수 기준 정렬
         );
@@ -68,7 +68,7 @@ public class PropertyApi {
     @GetMapping("/list/like")
     public ApiResponse<PageResponse<PropertyListResponse>> listPropertyByLike(PageRequest pageRequest) {
         Pageable pageable = org.springframework.data.domain.PageRequest.of(
-                pageRequest.getPage(),
+                pageRequest.getPage() - 1,
                 pageRequest.getSize(),
                 Sort.by(Sort.Direction.DESC, "statistic.likeCount") // 좋아요 기준 정렬
         );
