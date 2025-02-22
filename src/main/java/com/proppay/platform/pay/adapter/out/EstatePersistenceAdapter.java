@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -16,6 +17,12 @@ import java.util.Optional;
 public class EstatePersistenceAdapter implements LoadEstatePort {
 
     private final EstateMongoRepository repository;
+
+    @Override
+    public List<Estate> loadEstatesNearBy( double longitude, double latitude, double radiusInKm) {
+        return repository.findByLocation(longitude, latitude,radiusInKm)
+                .stream().map(EstateDocument::toDomain).toList();
+    }
 
     @Override
     public Optional<Estate> loadEstateByCode(String kaptCode) {

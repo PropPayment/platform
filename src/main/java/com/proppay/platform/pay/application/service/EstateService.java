@@ -19,7 +19,8 @@ public class EstateService implements GetEstateUseCase {
 
     @Override
     public List<Estate> loadEstatesNearBy(double latitude, double longitude, double radiusInKm) {
-        return List.of();
+        double radiusInRadians = radiusInKm / 6378.1;  // 반경 km -> radians 변환
+        return loadPort.loadEstatesNearBy(latitude, longitude, radiusInRadians);
     }
 
     @Override

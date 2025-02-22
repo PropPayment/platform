@@ -5,6 +5,7 @@ import com.proppay.platform.core.dto.PageRequest;
 import com.proppay.platform.core.dto.PageResponse;
 import com.proppay.platform.pay.adapter.in.web.dto.EstateDetailResponse;
 import com.proppay.platform.pay.adapter.in.web.dto.EstateListResponse;
+import com.proppay.platform.pay.adapter.in.web.dto.EstateLocationRequest;
 import com.proppay.platform.pay.application.in.estate.GetEstateUseCase;
 import com.proppay.platform.pay.domain.estate.Estate;
 import jakarta.persistence.EntityNotFoundException;
@@ -63,4 +64,12 @@ public class EstateApi {
         return ApiResponse.ok(new PageResponse<>(dtolist, pageRequest, result.getTotalElements()));
     }
 
+    // 특정 좌표 근처의 아파트 목록 조회
+    @GetMapping("/list/location")
+    public ApiResponse<List<EstateListResponse>> getEstateByLocation(@RequestBody EstateLocationRequest request) {
+
+        List<Estate> list = getService.loadEstatesNearBy(request.getLongitude(), request.getLatitude(), request.getRadius());
+        return ApiResponse.ok(EstateListResponse.from(list));
+
+    }
 }
