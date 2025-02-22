@@ -11,17 +11,17 @@ import lombok.NoArgsConstructor;
 @Getter
 public class PropertySnippet {
 
-    private String title;
+    private String aptName;
     private String description;
     private int quantity; // 방 개수
     private int bathrooms; // 욕실 개수 추가
     private int builtYear; // 건축 연도 추가
 
     // 생성자
-    public static PropertySnippet of(String title, String description, int quantity,
+    public static PropertySnippet of(String aptName, String description, int quantity,
                                      int bathrooms, int builtYear) {
         return PropertySnippet.builder()
-                .title(title)
+                .aptName(aptName)
                 .description(description)
                 .quantity(quantity)
                 .bathrooms(bathrooms)

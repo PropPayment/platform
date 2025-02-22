@@ -3,7 +3,7 @@ package com.proppay.platform.pay.adapter.in.web.dto;
 import lombok.Data;
 
 @Data
-public class ConditionRequest {
+public class PropertyConditionRequest {
 
     // 지역
     private String city; // 도시

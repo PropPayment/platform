@@ -8,14 +8,11 @@ import lombok.Data;
 @Data
 @Builder
 public class PropertySnippetResponse {
-    private String title;
-    private String description;
-
+    private String complexName;
     private String streetAddress;
+
     private String detailAddress;
-    private String city;
-    private String district;
-    private String postalCode;
+    private String description;
 
     private int quantity;
     private int bathrooms;
@@ -23,13 +20,10 @@ public class PropertySnippetResponse {
 
     public static PropertySnippetResponse from(PropertySnippet snippet, PropertyAddress address) {
         return PropertySnippetResponse.builder()
-                .title(snippet.getTitle())
+                .complexName(snippet.getAptName())
                 .description(snippet.getDescription())
                 .streetAddress(address.getStreetAddress())
                 .detailAddress(address.getDetailAddress())
-                .city(address.getCity())
-                .district(address.getDistrict())
-                .postalCode(address.getPostalCode())
                 .quantity(snippet.getQuantity())
                 .bathrooms(snippet.getBathrooms())
                 .builtYear(snippet.getBuiltYear())

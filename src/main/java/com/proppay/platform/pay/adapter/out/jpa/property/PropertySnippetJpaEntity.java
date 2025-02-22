@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class PropertySnippetJpaEntity {
 
-    private String title;
+    private String aptName;
     private String description;
     private int quantity; // 방 개수
     private int bathrooms; // 욕실 개수 추가
@@ -22,7 +22,7 @@ public class PropertySnippetJpaEntity {
     // from
     public static PropertySnippetJpaEntity from(PropertySnippet snippet) {
         return PropertySnippetJpaEntity.builder()
-                .title(snippet.getTitle())
+                .aptName(snippet.getAptName())
                 .description(snippet.getDescription())
                 .quantity(snippet.getQuantity())
                 .bathrooms(snippet.getBathrooms())
@@ -33,7 +33,7 @@ public class PropertySnippetJpaEntity {
     // toDomain
     public PropertySnippet toDomain() {
         return PropertySnippet.builder()
-                .title(title)
+                .aptName(aptName)
                 .description(description)
                 .quantity(quantity)
                 .bathrooms(bathrooms)

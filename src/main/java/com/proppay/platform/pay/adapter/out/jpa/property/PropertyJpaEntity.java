@@ -38,10 +38,14 @@ public class PropertyJpaEntity extends BaseEntity {
 
     private boolean verified;
 
+    // 기존 아파트와 연관되는 변수
+    private String kaptCode;
+
     // from
     public static PropertyJpaEntity from(Property property) {
         return PropertyJpaEntity.builder()
                 .type(property.getType())
+                .kaptCode(property.getKaptCode())
                 .address(PropertyAddressJpaEntity.from(property.getAddress()))
                 .owner(UserJpaEntity.from(property.getOwner()))
                 .snippet(PropertySnippetJpaEntity.from(property.getSnippet()))
@@ -56,6 +60,7 @@ public class PropertyJpaEntity extends BaseEntity {
         return Property.builder()
                 .id(id)
                 .type(type)
+                .kaptCode(kaptCode)
                 .address(address.toDomain())
                 .owner(owner.toDomain())
                 .snippet(snippet.toDomain())
