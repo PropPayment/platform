@@ -1,5 +1,6 @@
 package com.proppay.platform.pay.application.in.estate;
 
+import com.proppay.platform.pay.adapter.in.web.dto.EstateListResponse;
 import com.proppay.platform.pay.domain.estate.Estate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,9 @@ public interface GetEstateUseCase {
 
     // 특정 좌표 주변의 아파트 가져오기
     List<Estate> loadEstatesNearBy(double latitude, double longitude, double radiusInKm);
+
+    // 특정 좌표 근처에서의 매물이 있는 아파트만 뜨도록
+    List<EstateListResponse> loadEstatesNearByProperty(double latitude, double longitude, double radiusInKm);
 
     // 코드를 바탕으로 아파트 가져오기
     Optional<Estate> loadEstateByCode(String kaptCode);

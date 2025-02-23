@@ -1,4 +1,4 @@
-package com.proppay.platform.pay.domain.transaction;
+package com.proppay.platform.pay.domain.exchange;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,20 +11,20 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Getter
-public class TransactionSnippet {
+public class ExchangeSnippet {
 
     private LocalDateTime requestedAt; // 거래 요청 시간
     private LocalDateTime confirmedAt; // 거래 확정 시간
     private LocalDateTime completedAt; // 거래 완료 시간
 
-    private long price;
     private String note;
 
     // 생성자
-    public static TransactionSnippet of(LocalDateTime requestedAt, long price, String note) {
-        return TransactionSnippet.builder()
+    public static ExchangeSnippet of(LocalDateTime requestedAt,String note) {
+        return ExchangeSnippet.builder()
                 .requestedAt(requestedAt)
-                .price(price)
+                .confirmedAt(requestedAt)
+                .completedAt(requestedAt)
                 .note(note)
                 .build();
     }

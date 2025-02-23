@@ -22,11 +22,10 @@ public class PropertyJpaEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private PropertyType type;
 
+    private Long ownerId;
+
     @Embedded
     private PropertyAddressJpaEntity address;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserJpaEntity owner;
 
     @Embedded
     private PropertySnippetJpaEntity snippet;
@@ -47,7 +46,7 @@ public class PropertyJpaEntity extends BaseEntity {
                 .type(property.getType())
                 .kaptCode(property.getKaptCode())
                 .address(PropertyAddressJpaEntity.from(property.getAddress()))
-                .owner(UserJpaEntity.from(property.getOwner()))
+                .ownerId(property.getOwnerId())
                 .snippet(PropertySnippetJpaEntity.from(property.getSnippet()))
                 .statistic(PropertyStatisticJpaEntity.from(property.getStatistic()))
                 .price(property.getPrice())
@@ -62,7 +61,7 @@ public class PropertyJpaEntity extends BaseEntity {
                 .type(type)
                 .kaptCode(kaptCode)
                 .address(address.toDomain())
-                .owner(owner.toDomain())
+                .ownerId(ownerId)
                 .snippet(snippet.toDomain())
                 .statistic(statistic.toDomain())
                 .price(price)

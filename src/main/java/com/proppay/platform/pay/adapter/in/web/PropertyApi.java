@@ -8,7 +8,6 @@ import com.proppay.platform.pay.adapter.in.web.dto.PropertyListResponse;
 import com.proppay.platform.pay.adapter.in.web.dto.PropertyRequest;
 import com.proppay.platform.pay.application.in.property.*;
 import com.proppay.platform.pay.domain.property.Property;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,7 +31,8 @@ public class PropertyApi {
     // 매물 생성
     @PostMapping
     public ApiResponse<PropertyDetailResponse> create(@Valid @RequestBody PropertyRequest request) {
-        return ApiResponse.created(PropertyDetailResponse.from(createService.create(request)));
+
+        return ApiResponse.created(createService.create(request));
     }
 
     // 최신 매물 목록 조회
@@ -83,10 +83,7 @@ public class PropertyApi {
     // 매물 상세 조회
     @GetMapping("/{id}")
     public ApiResponse<PropertyDetailResponse> getDetailOne(@PathVariable Long id) {
-        Property property = getService.getPropertyDetails(id)
-                .orElseThrow(() -> new EntityNotFoundException("매물이 존재하지 않습니다."));
-
-        return ApiResponse.ok(PropertyDetailResponse.from(property));
+        return ApiResponse.ok(getService.getPropertyDetails(id));
     }
 
     // 매물 삭제

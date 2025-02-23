@@ -2,6 +2,7 @@ package com.proppay.platform.pay.adapter.in.web.dto;
 
 import com.proppay.platform.pay.domain.property.Property;
 import com.proppay.platform.pay.domain.property.PropertyType;
+import com.proppay.platform.pay.domain.user.User;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,8 +11,7 @@ import lombok.Getter;
 public class PropertyDetailResponse {
 
     private Long id;
-    private Long ownerId;
-    private String ownerUsername;
+    private String ownerName;
     private PropertyType type;
     private long price;
     private boolean verified;
@@ -19,11 +19,10 @@ public class PropertyDetailResponse {
     private PropertySnippetResponse snippet;
     private PropertyStatisticsResponse statistics;
 
-    public static PropertyDetailResponse from(Property property) {
+    public static PropertyDetailResponse from(Property property, User owner) {
         return PropertyDetailResponse.builder()
                 .id(property.getId())
-                .ownerId(property.getOwner().getId())
-                .ownerUsername(property.getOwner().getUsername())
+                .ownerName(owner.getUsername())
                 .type(property.getType())
                 .price(property.getPrice())
                 .verified(property.isVerified())
@@ -31,4 +30,5 @@ public class PropertyDetailResponse {
                 .statistics(PropertyStatisticsResponse.from(property.getStatistic()))
                 .build();
     }
+
 }
