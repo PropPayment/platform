@@ -1,8 +1,5 @@
 package com.proppay.platform.pay.adapter.out.jpa.exchange;
 
-import com.proppay.platform.pay.adapter.out.jpa.lawyer.LawyerJpaEntity;
-import com.proppay.platform.pay.adapter.out.jpa.property.PropertyJpaEntity;
-import com.proppay.platform.pay.adapter.out.jpa.user.UserJpaEntity;
 import com.proppay.platform.pay.domain.exchange.Exchange;
 import com.proppay.platform.pay.domain.exchange.ExchangeStatus;
 import jakarta.persistence.*;
@@ -14,25 +11,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
-@Entity
+@Getter@Entity
 public class ExchangeJpaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserJpaEntity seller;
+    private Long sellerId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private UserJpaEntity buyer;
+    private Long buyerId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private LawyerJpaEntity lawyer;
+    private Long propertyId; // 변경된 부분 (Property 객체 대신 ID만 저장)
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private PropertyJpaEntity property;
+    private Long lawyerId; // 비어도 되는건가
 
     @Embedded
     private ExchangeSnippetJpaEntity snippet;
@@ -44,10 +36,10 @@ public class ExchangeJpaEntity {
     public static ExchangeJpaEntity from(Exchange exchange) {
         return ExchangeJpaEntity.builder()
                 .id(exchange.getId())
-                .seller(UserJpaEntity.from(exchange.getSeller()))
-                .buyer(UserJpaEntity.from(exchange.getBuyer()))
-                .lawyer(LawyerJpaEntity.from(exchange.getLawyer()))
-                .property(PropertyJpaEntity.from(exchange.getProperty()))
+                .sellerId(exchange.getSellerId())
+                .buyerId(exchange.getBuyerId())
+                .propertyId(exchange.getPropertyId()) // 변경된 부분
+                .lawyerId(exchange.getLawyerId())
                 .snippet(ExchangeSnippetJpaEntity.from(exchange.getSnippet()))
                 .status(exchange.getStatus())
                 .build();
@@ -57,10 +49,10 @@ public class ExchangeJpaEntity {
     public Exchange toDomain() {
         return Exchange.builder()
                 .id(id)
-                .seller(seller.toDomain())
-                .buyer(buyer.toDomain())
-                .lawyer(lawyer.toDomain())
-                .property(property.toDomain())
+                .sellerId(sellerId)
+                .buyerId(buyerId)
+                .propertyId(propertyId)
+                .lawyerId(lawyerId)
                 .snippet(snippet.toDomain())
                 .status(status)
                 .build();
