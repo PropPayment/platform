@@ -14,16 +14,17 @@ import com.proppay.platform.pay.application.out.user.LoadUserPort;
 import com.proppay.platform.pay.domain.exchange.Exchange;
 import com.proppay.platform.pay.domain.exchange.ExchangeSnippet;
 import com.proppay.platform.pay.domain.exchange.ExchangeStatus;
+import com.proppay.platform.pay.domain.lawyer.Lawyer;
 import com.proppay.platform.pay.domain.property.Property;
 import com.proppay.platform.pay.domain.user.User;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class ExchangeService implements ContractExchangeUseCase, RequestExchangeUseCase, RejectExchangeUseCase {
 
     private final SaveExchangePort savePort;
@@ -31,26 +32,32 @@ public class ExchangeService implements ContractExchangeUseCase, RequestExchange
     private final DeleteExchangePort deletePort;
     private final UpdateExchangePort updatePort;
 
-    private final LoadLawyerPort loadLawyerPort;
     private final LoadUserPort loadUserPort;
+    private final LoadLawyerPort loadLawyerPort;
     private final LoadPropertyPort loadPropertyPort;
 
     @Override
     public Exchange requestExchange(ExchangeRequest request) {
-
         // 유저 정보
         User buyer = getUser(request.getBuyerId());
         User seller = getUser(request.getSellerId());
 
+        // 기본 법무사 선임
+        Lawyer lawyer = loadLawyerPort.loadLawyer(request.getLawyerId())
+                .orElseThrow(() -> new EntityNotFoundException("해당하는 법무사가 존재하지 않습니다."));
+
+        // 매물 정보 가져오기
         Property property = loadPropertyPort.loadPropertyBySellerIdAndPropertyId(seller.getId(), request.getPropertyId())
                 .orElseThrow(() -> new IllegalStateException("판매자가 내놓은 해당 매물을 찾을 수 없습니다."));
 
-        // 교환 정보
+        // 교환 정보 생성
         ExchangeSnippet snippet = ExchangeSnippet.of(request.getRequestedAt(), request.getNote());
-        Exchange exchange = Exchange.of(seller, buyer, property, snippet);
+
+        Exchange exchange = Exchange.of(seller, buyer, property, lawyer, snippet);
 
         return savePort.saveExchange(exchange);
     }
+
 
     private User getUser(Long id) {
         return loadUserPort.loadUser(id)

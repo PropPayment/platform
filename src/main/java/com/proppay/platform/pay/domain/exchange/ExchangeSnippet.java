@@ -23,6 +23,8 @@ public class ExchangeSnippet {
     public static ExchangeSnippet of(LocalDateTime requestedAt,String note) {
         return ExchangeSnippet.builder()
                 .requestedAt(requestedAt)
+                .confirmedAt(requestedAt)
+                .completedAt(requestedAt)
                 .note(note)
                 .build();
     }

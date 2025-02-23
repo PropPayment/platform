@@ -1,5 +1,6 @@
 package com.proppay.platform.pay.domain.exchange;
 
+import com.proppay.platform.pay.domain.BaseDomain;
 import com.proppay.platform.pay.domain.lawyer.Lawyer;
 import com.proppay.platform.pay.domain.property.Property;
 import com.proppay.platform.pay.domain.user.User;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class Exchange {
+public class Exchange extends BaseDomain {
 
     private Long id;
 
@@ -26,15 +27,25 @@ public class Exchange {
     private ExchangeStatus status;
 
     // 생성자
-    public static Exchange of(User seller, User buyer, Property property,
-                              ExchangeSnippet snippet) {
+    public static Exchange of(User seller, User buyer, Property property,Lawyer lawyer, ExchangeSnippet snippet) {
+
+        checkUser(seller, buyer);
+
         return Exchange.builder()
                 .seller(seller)
                 .buyer(buyer)
                 .property(property)
+                .lawyer(lawyer)
                 .snippet(snippet)
                 .status(ExchangeStatus.REQUESTED) // 기본값: 대기 중
                 .build();
+    }
+
+    // 동일 유저간 거래 금지
+    private static void checkUser(User seller, User buyer) {
+        if (seller.getId().equals(buyer.getId())) {
+            throw new IllegalArgumentException("판매자와 구매자는 동일할 수 없습니다.");
+        }
     }
 
     // 거래 대화 이후, 확정 시 법무사 연결
@@ -57,7 +68,6 @@ public class Exchange {
 
     // 교환 상태 수정하기
     public void changeStatus(ExchangeStatus status) {
-
         this.status = status;
     }
 
