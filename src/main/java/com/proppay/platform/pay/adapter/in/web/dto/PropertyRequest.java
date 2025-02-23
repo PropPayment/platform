@@ -8,9 +8,6 @@ import lombok.Data;
 public class PropertyRequest {
 
     // 위치 정보
-    @NotBlank(message = "도로명 주소는 필수입니다.")
-    private String streetAddress;
-
     @NotBlank(message = "상세 주소는 필수입니다.")
     private String detailAddress;
 
@@ -25,12 +22,12 @@ public class PropertyRequest {
     @Min(value = 0, message = "가격은 0 이상이어야 합니다.")
     private long price;
 
+    @NotBlank(message = "아파트 코드은 필수입니다.")
+    private String aptCode;
+
     // 매물의 특징
     @NotNull(message = "매물 유형은 필수입니다.")
     private PropertyType type;
-
-    @NotBlank(message = "매물 이름은 필수입니다.")
-    private String title;
 
     @NotBlank(message = "매물 설명은 필수입니다.")
     private String description;

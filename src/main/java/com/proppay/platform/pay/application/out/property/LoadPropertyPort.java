@@ -1,6 +1,6 @@
 package com.proppay.platform.pay.application.out.property;
 
-import com.proppay.platform.pay.adapter.in.web.dto.ConditionRequest;
+import com.proppay.platform.pay.adapter.in.web.dto.PropertyConditionRequest;
 import com.proppay.platform.pay.domain.property.Property;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +21,7 @@ public interface LoadPropertyPort {
     Page<Property> loadListByViewCount(Pageable pageable);
 
     // 조건에 따른 정보 가져오기
-    Page<Property> loadListByCondition(Pageable pageable, ConditionRequest request);
+    Page<Property> loadListByCondition(Pageable pageable, PropertyConditionRequest request);
 
 
 }

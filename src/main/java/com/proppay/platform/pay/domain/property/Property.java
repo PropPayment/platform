@@ -24,10 +24,14 @@ public class Property extends BaseDomain {
     private long price;
     private boolean verified;
 
+    // 기존 아파트와 연관되는 변수
+    private String kaptCode;
+
     // 생성자
-    public static Property of(User user, PropertyType type, PropertyAddress address, PropertySnippet snippet, PropertyStatistic statistic, long price) {
+    public static Property of(User user, PropertyType type, PropertyAddress address, PropertySnippet snippet, PropertyStatistic statistic, long price, String kaptCode) {
         return Property.builder()
                 .owner(user)
+                .kaptCode(kaptCode)
                 .type(type)
                 .address(address)
                 .snippet(snippet)

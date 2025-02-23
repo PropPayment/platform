@@ -22,7 +22,7 @@ public class PropertyListResponse {
     public static PropertyListResponse from(Property property) {
         return PropertyListResponse.builder()
                 .id(property.getId())
-                .title(property.getSnippet().getTitle())
+                .title(property.getSnippet().getAptName())
                 .type(property.getType())
                 .price(property.getPrice())
                 .city(property.getAddress().getCity())
