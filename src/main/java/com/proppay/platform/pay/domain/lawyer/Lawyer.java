@@ -1,14 +1,16 @@
 package com.proppay.platform.pay.domain.lawyer;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.proppay.platform.pay.domain.admin.Admin;
+import com.proppay.platform.pay.domain.admin.AdminRole;
+import com.proppay.platform.pay.domain.admin.AdminStatus;
+import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Builder
+@Slf4j
 public class Lawyer {
 
     private Long id; // 기본 키
@@ -41,6 +43,24 @@ public class Lawyer {
                 .statistics(statistics)
                 .status(LawyerStatus.PENDING)
                 .build();
+    }
+
+    // 승인하기
+    public void approve(Admin admin) {
+        if (this.status == LawyerStatus.APPROVED) {
+            throw new IllegalStateException("이미 승인된 법무사입니다.");
+        }
+
+        if (admin.getStatus() != AdminStatus.ACTIVE) {
+            throw new IllegalStateException("비활성화된 관리자는 승인할 수 없습니다.");
+        }
+
+        if (admin.getRole() != AdminRole.BROKER_MANAGER && admin.getRole() != AdminRole.SUPER_ADMIN) {
+            throw new IllegalStateException("승인 권한이 없는 관리자입니다.");
+        }
+
+        this.status = LawyerStatus.APPROVED;
+        log.info("법무사 : {},승인한 관리자 : {}", this.getLicenseNumber(), admin.getId());
     }
 
 }
