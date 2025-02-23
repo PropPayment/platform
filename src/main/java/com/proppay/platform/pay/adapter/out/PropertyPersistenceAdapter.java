@@ -73,4 +73,8 @@ public class PropertyPersistenceAdapter implements LoadPropertyPort, SavePropert
                 .map(PropertyJpaEntity::toDomain);
     }
 
+    @Override
+    public int countPropertiesInEstate(String kaptCode) {
+        return repository.countByKaptCode(kaptCode);
+    }
 }

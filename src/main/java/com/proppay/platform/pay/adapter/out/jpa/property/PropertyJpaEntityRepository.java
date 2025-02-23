@@ -24,4 +24,7 @@ public interface PropertyJpaEntityRepository extends JpaRepository<PropertyJpaEn
     @Query("SELECT p FROM PropertyJpaEntity p WHERE p.ownerId = :ownerId AND p.id = :id")
     Optional<PropertyJpaEntity> findByOwnerIdAndId(@Param("ownerId") Long ownerId, @Param("id") Long id);
 
+    // 특정 아파트(kaptCode)에 대한 매물 개수 조회
+    int countByKaptCode(String kaptCode);
+
 }

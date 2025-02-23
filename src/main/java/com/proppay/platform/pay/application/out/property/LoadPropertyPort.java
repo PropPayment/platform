@@ -29,6 +29,8 @@ public interface LoadPropertyPort {
     // 특정 유저가 내놓은 아이템과 매물 조회
     Optional<Property> loadPropertyBySellerIdAndPropertyId(Long sellerId, Long propertyId);
 
+    // 특정 아파트에 매물이 몇 개 있는지 조회
+    int countPropertiesInEstate(String kaptCode);
 
 
 }

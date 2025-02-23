@@ -72,4 +72,15 @@ public class EstateApi {
         return ApiResponse.ok(EstateListResponse.from(list));
 
     }
+
+    // 특정 좌표 근처의 아파트 및 매물 목록 조회
+    @GetMapping("/list/location/property")
+    public ApiResponse<List<EstateListResponse>> getEstateByLocationByKaptCode(@RequestBody EstateLocationRequest request) {
+
+        List<EstateListResponse> list = getService.loadEstatesNearByProperty(request.getLongitude(), request.getLatitude(), request.getRadius());
+
+        return ApiResponse.ok(list);
+
+    }
+
 }
