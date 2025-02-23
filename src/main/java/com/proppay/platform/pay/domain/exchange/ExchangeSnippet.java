@@ -17,14 +17,12 @@ public class ExchangeSnippet {
     private LocalDateTime confirmedAt; // 거래 확정 시간
     private LocalDateTime completedAt; // 거래 완료 시간
 
-    private long price;
     private String note;
 
     // 생성자
-    public static ExchangeSnippet of(LocalDateTime requestedAt, long price, String note) {
+    public static ExchangeSnippet of(LocalDateTime requestedAt,String note) {
         return ExchangeSnippet.builder()
                 .requestedAt(requestedAt)
-                .price(price)
                 .note(note)
                 .build();
     }

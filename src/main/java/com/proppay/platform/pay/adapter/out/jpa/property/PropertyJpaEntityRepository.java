@@ -5,6 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.*;
+
 public interface PropertyJpaEntityRepository extends JpaRepository<PropertyJpaEntity, Long> {
 
     @Query("SELECT p FROM PropertyJpaEntity p ORDER BY p.createdAt DESC")
@@ -15,5 +17,9 @@ public interface PropertyJpaEntityRepository extends JpaRepository<PropertyJpaEn
 
     @Query("SELECT p FROM PropertyJpaEntity p ORDER BY p.statistic.viewCount DESC")
     Page<PropertyJpaEntity> findAllOrderByViewCount(Pageable pageable);
+
+    boolean existsByOwnerId(Long ownerId);
+
+    Optional<PropertyJpaEntity> findByOwnerIdAndId(Long ownerId, Long id);
 
 }

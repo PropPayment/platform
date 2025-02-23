@@ -62,4 +62,15 @@ public class PropertyPersistenceAdapter implements LoadPropertyPort, SavePropert
         repository.deleteById(id);
     }
 
+    @Override
+    public boolean existsPropertyBySellerId(Long sellerId) {
+        return repository.existsByOwnerId(sellerId);
+    }
+
+    @Override
+    public Optional<Property> loadPropertyBySellerIdAndPropertyId(Long sellerId, Long propertyId) {
+        return repository.findByOwnerIdAndId(sellerId, propertyId)
+                .map(PropertyJpaEntity::toDomain);
+    }
+
 }
