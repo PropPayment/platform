@@ -24,7 +24,7 @@ public class PropertyListResponse {
 
     public static PropertyListResponse from(Property property) {
 
-        PropertyAddress address = AddressParser.parseAddress(property.getAddress().getStreetAddress());
+        PropertyAddress address = AddressParser.parsePropertyAddress(property.getAddress().getStreetAddress());
 
 
         return PropertyListResponse.builder()

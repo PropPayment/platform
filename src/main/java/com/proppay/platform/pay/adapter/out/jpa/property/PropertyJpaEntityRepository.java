@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.*;
 
@@ -20,6 +21,7 @@ public interface PropertyJpaEntityRepository extends JpaRepository<PropertyJpaEn
 
     boolean existsByOwnerId(Long ownerId);
 
-    Optional<PropertyJpaEntity> findByOwnerIdAndId(Long ownerId, Long id);
+    @Query("SELECT p FROM PropertyJpaEntity p WHERE p.ownerId = :ownerId AND p.id = :id")
+    Optional<PropertyJpaEntity> findByOwnerIdAndId(@Param("ownerId") Long ownerId, @Param("id") Long id);
 
 }
