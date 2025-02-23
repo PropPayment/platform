@@ -26,13 +26,12 @@ public class Admin extends BaseDomain {
     private int failedLoginAttempts = 0;  //로그인 실패 횟수 (보안 정책 적용 가능)
     private LocalDateTime passwordUpdatedAt; // 마지막 비밀번호 변경 시간 (비밀번호 변경 주기 관리)
 
-    public Admin of (String userId, String password, AdminRole role, AdminStatus status, LocalDateTime lastLoginAt) {
+    public static Admin of (String userId, String password, AdminRole role, AdminStatus status) {
         return Admin.builder()
                 .userId(userId)
                 .password(password)
                 .role(role)
                 .status(status)
-                .lastLoginAt(lastLoginAt)
                 .build();
     }
 
