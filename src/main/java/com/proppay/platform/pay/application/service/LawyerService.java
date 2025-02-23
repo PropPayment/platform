@@ -12,7 +12,6 @@ import com.proppay.platform.pay.domain.lawyer.Lawyer;
 import com.proppay.platform.pay.domain.lawyer.LawyerAddress;
 import com.proppay.platform.pay.domain.lawyer.LawyerSnippet;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -22,16 +21,16 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class LawyerService implements RegisterLawyerUseCase, GetLawyerUseCase, ListLawyersUseCase, ApproveLawyerUseCase, DeleteLawyerUseCase {
 
-    private SaveLawyerPort savePort;
-    private LoadLawyerPort loadPort;
-    private DeleteLawyerPort deletePort;
-    private AdminPort loadAdminPort;
+    private final SaveLawyerPort savePort;
+    private final LoadLawyerPort loadPort;
+    private final DeleteLawyerPort deletePort;
+    private final AdminPort loadAdminPort;
+
     @Override
-    public Lawyer registerBroker(LawyerRequest request) {
+    public Lawyer registerLawyer(LawyerRequest request) {
 
         LawyerAddress address = LawyerAddress.of(request.getStreetAddress(), request.getDetailAddress(), request.getPostalCode());
         LawyerSnippet snippet = LawyerSnippet.of(request.getRegion(), request.getWorkingHours(), request.getAffiliatedAgency(), request.isRemoteSupportAvailable());

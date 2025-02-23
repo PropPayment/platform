@@ -10,6 +10,6 @@ public interface RegisterLawyerUseCase {
         법무사로 회원가입
      */
 
-    Lawyer registerBroker(LawyerRequest request);
+    Lawyer registerLawyer(LawyerRequest request);
 
 }
