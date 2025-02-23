@@ -1,5 +1,6 @@
 package com.proppay.platform.pay.adapter.out.jpa.transaction;
 
+import com.proppay.platform.pay.adapter.out.jpa.broker.BrokerJpaEntity;
 import com.proppay.platform.pay.adapter.out.jpa.property.PropertyJpaEntity;
 import com.proppay.platform.pay.adapter.out.jpa.user.UserJpaEntity;
 import com.proppay.platform.pay.domain.transaction.TransactionStatus;
@@ -25,6 +26,9 @@ public class TransactionJpaEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private UserJpaEntity buyer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BrokerJpaEntity broker;
 
     @OneToOne(fetch = FetchType.LAZY)
     private PropertyJpaEntity property;

@@ -37,7 +37,6 @@ public class AdminJpaEntity {
     // from
     public static AdminJpaEntity from(Admin admin) {
         return AdminJpaEntity.builder()
-                .id(admin.getId())
                 .userId(admin.getUserId())
                 .password(admin.getPassword())
                 .role(admin.getRole())

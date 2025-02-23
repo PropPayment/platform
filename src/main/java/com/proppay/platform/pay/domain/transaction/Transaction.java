@@ -1,5 +1,6 @@
 package com.proppay.platform.pay.domain.transaction;
 
+import com.proppay.platform.pay.domain.broker.Broker;
 import com.proppay.platform.pay.domain.property.Property;
 import com.proppay.platform.pay.domain.user.User;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,8 @@ public class Transaction {
 
     private User seller;
     private User buyer;
+    private Broker broker;
+
     private Property property;
 
     private TransactionSnippet snippet;

@@ -35,16 +35,20 @@ public class BrokerApi {
     }
 
     @GetMapping("/list")
-    public ApiResponse<PageResponse<BrokerListResponse>> list(PageRequest pageRequest, @RequestParam(value = "status", required = false) BrokerStatus status) {
+    public ApiResponse<PageResponse<BrokerListResponse>> list(
+            PageRequest pageRequest,
+            @RequestParam(value = "status", required = false) BrokerStatus status) {
+
         Pageable pageable = org.springframework.data.domain.PageRequest.of(
                 pageRequest.getPage() - 1,
                 pageRequest.getSize(),
                 Sort.by(Sort.Direction.DESC, "id")
         );
 
-        Page<Broker> result;
+        BrokerStatus safeStatus = Optional.ofNullable(status).orElse(BrokerStatus.APPROVED);
 
-        switch (status) {
+        Page<Broker> result;
+        switch (safeStatus) {
             case PENDING:
                 result = listService.getListNotApproved(pageable);
                 break;
