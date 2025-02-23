@@ -1,9 +1,9 @@
-package com.proppay.platform.pay.adapter.out.jpa.transaction;
+package com.proppay.platform.pay.adapter.out.jpa.exchange;
 
 import com.proppay.platform.pay.adapter.out.jpa.broker.BrokerJpaEntity;
 import com.proppay.platform.pay.adapter.out.jpa.property.PropertyJpaEntity;
 import com.proppay.platform.pay.adapter.out.jpa.user.UserJpaEntity;
-import com.proppay.platform.pay.domain.transaction.TransactionStatus;
+import com.proppay.platform.pay.domain.exchange.ExchangeStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Getter
 @Entity
-public class TransactionJpaEntity {
+public class ExchangeJpaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,9 +34,9 @@ public class TransactionJpaEntity {
     private PropertyJpaEntity property;
 
     @Embedded
-    private TransactionSnippetJpaEntity snippet;
+    private ExchangeSnippetJpaEntity snippet;
 
     @Enumerated(EnumType.STRING)
-    private TransactionStatus status;
+    private ExchangeStatus status;
 
 }

@@ -1,6 +1,6 @@
-package com.proppay.platform.pay.domain.transaction;
+package com.proppay.platform.pay.domain.exchange;
 
-public enum TransactionStatus {
+public enum ExchangeStatus {
 
     REQUESTED,  // 중개 요청됨 (매물 등록)
     MATCHED,    // 매수자와 매칭됨

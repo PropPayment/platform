@@ -1,4 +1,4 @@
-package com.proppay.platform.pay.domain.transaction;
+package com.proppay.platform.pay.domain.exchange;
 
 import com.proppay.platform.pay.domain.broker.Broker;
 import com.proppay.platform.pay.domain.property.Property;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Getter
-public class Transaction {
+public class Exchange {
 
     private Long id;
 
@@ -22,18 +22,18 @@ public class Transaction {
 
     private Property property;
 
-    private TransactionSnippet snippet;
-    private TransactionStatus status;
+    private ExchangeSnippet snippet;
+    private ExchangeStatus status;
 
     // 생성자
-    public static Transaction of(User seller, User buyer, Property property,
-                                 TransactionSnippet snippet) {
-        return Transaction.builder()
+    public static Exchange of(User seller, User buyer, Property property,
+                              ExchangeSnippet snippet) {
+        return Exchange.builder()
                 .seller(seller)
                 .buyer(buyer)
                 .property(property)
                 .snippet(snippet)
-                .status(TransactionStatus.REQUESTED) // 기본값: 대기 중
+                .status(ExchangeStatus.REQUESTED) // 기본값: 대기 중
                 .build();
     }
 

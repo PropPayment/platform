@@ -1,6 +1,5 @@
-package com.proppay.platform.pay.adapter.out.jpa.transaction;
+package com.proppay.platform.pay.domain.exchange;
 
-import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,8 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Getter
-@Embeddable
-public class TransactionSnippetJpaEntity {
+public class ExchangeSnippet {
 
     private LocalDateTime requestedAt; // 거래 요청 시간
     private LocalDateTime confirmedAt; // 거래 확정 시간
@@ -21,5 +19,14 @@ public class TransactionSnippetJpaEntity {
 
     private long price;
     private String note;
+
+    // 생성자
+    public static ExchangeSnippet of(LocalDateTime requestedAt, long price, String note) {
+        return ExchangeSnippet.builder()
+                .requestedAt(requestedAt)
+                .price(price)
+                .note(note)
+                .build();
+    }
 
 }
