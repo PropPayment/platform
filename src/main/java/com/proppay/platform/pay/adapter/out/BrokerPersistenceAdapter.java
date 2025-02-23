@@ -10,11 +10,9 @@ import com.proppay.platform.pay.domain.broker.BrokerStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -39,33 +37,32 @@ public class BrokerPersistenceAdapter implements SaveBrokerPort, LoadBrokerPort,
 
     @Override
     public Page<Broker> loadBrokers(Pageable pageable) {
-        Page<BrokerJpaEntity> result = repository.findAllByOrderByCreatedAtDesc(BrokerStatus.APPROVED,pageable);
-        return convertToPage(result, pageable);
+        return repository.findAllByOrderByCreatedAtDesc(BrokerStatus.APPROVED, pageable)
+                .map(BrokerJpaEntity::toDomain);
     }
 
     @Override
     public Page<Broker> loadBrokersNotApproved(Pageable pageable) {
-        Page<BrokerJpaEntity> result = repository.findAllByOrderByCreatedAtDesc(BrokerStatus.PENDING, pageable);
-        return convertToPage(result, pageable);
+        return repository.findAllByOrderByCreatedAtDesc(BrokerStatus.PENDING, pageable)
+                .map(BrokerJpaEntity::toDomain);
     }
 
     @Override
     public Page<Broker> loadBrokersRejected(Pageable pageable) {
-        Page<BrokerJpaEntity> result = repository.findAllByOrderByCreatedAtDesc(BrokerStatus.REJECTED, pageable);
-        return convertToPage(result, pageable);
+        return repository.findAllByOrderByCreatedAtDesc(BrokerStatus.REJECTED, pageable)
+                .map(BrokerJpaEntity::toDomain);
     }
 
     @Override
     public Page<Broker> loadBrokersByRegion(String city, String district, String dong, Pageable pageable) {
-        Page<BrokerJpaEntity> result = repository.findByRegion(BrokerStatus.APPROVED, city, district, dong, pageable);
-        return convertToPage(result, pageable);
+        return repository.findByRegion(BrokerStatus.APPROVED, city, district, dong, pageable)
+                .map(BrokerJpaEntity::toDomain);
     }
 
     @Override
     public Page<Broker> loadBrokersByRegionAndLike(String city, String district, String dong, Pageable pageable) {
-        Page<BrokerJpaEntity> result = repository.findByRegionAndLikeCount(BrokerStatus.APPROVED, city, district, dong, pageable);
-        return convertToPage(result, pageable);
-
+        return repository.findByRegionAndLikeCount(BrokerStatus.APPROVED, city, district, dong, pageable)
+                .map(BrokerJpaEntity::toDomain);
     }
 
     @Override
@@ -78,15 +75,4 @@ public class BrokerPersistenceAdapter implements SaveBrokerPort, LoadBrokerPort,
     public void deleteBroker(Long id) {
         repository.deleteById(id);
     }
-
-
-    /**
-     * Page<BrokerJpaEntity>를 Page<Broker>로 변환하는 공통 메서드
-     */
-
-    private Page<Broker> convertToPage(Page<BrokerJpaEntity> result, Pageable pageable) {
-        List<Broker> dtoList = result.map(BrokerJpaEntity::toDomain).getContent();
-        return new PageImpl<>(dtoList, pageable, result.getTotalElements());
-    }
-
 }
